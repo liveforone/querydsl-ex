@@ -9,3 +9,15 @@ XxCustom, XxImpl 로 이름이 반드시 같아야한다.
 따라서 직접 orderby절로 정렬해주어야함
 
 where 절 정리
+(https://dev-alxndr.tistory.com/28)
+
+수정/삭제1
+(https://escapefromcoding.tistory.com/621)
+수정/삭제2
+(https://dotheright.tistory.com/291)
+
+조인
+(https://hjhng125.github.io/querydsl/querydsl-join/)
+
+페이징
+(https://kingchan223.tistory.com/m/389)
