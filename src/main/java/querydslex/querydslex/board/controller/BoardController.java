@@ -52,7 +52,7 @@ public class BoardController {
         return ResponseEntity.ok("포스팅 성공");
     }
 
-    @PutMapping("/board/edit/{id}")
+    @PatchMapping("/board/edit/{id}")
     public ResponseEntity<?> editBoard(
             @PathVariable("id") Long id,
             @RequestBody String content
