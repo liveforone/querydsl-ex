@@ -1,10 +1,16 @@
 package querydslex.querydslex.comment.repository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import querydslex.querydslex.comment.model.Comment;
+
+import java.util.List;
 
 public interface CommentRepositoryCustom {
 
-    Page<Comment> findCommentsByBoardId(Long boardId, Pageable pageable);
+    List<Comment> findCommentsByBoardId(Long boardId);
+
+    Long countCommentByBoardId(Long boardId);
+
+    Comment findOneById(Long id);
+
+    void deleteOneById(Long id);
 }
