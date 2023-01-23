@@ -23,6 +23,12 @@ public class BoardService {
         );
     }
 
+    public Page<BoardResponse> searchByTitle(String title, Pageable pageable) {
+        return BoardMapper.entityToDtoPage(
+                boardRepository.searchBoardsByTitle(title, pageable)
+        );
+    }
+
     @Transactional
     public void saveBoard(BoardRequest boardRequest) {
         boardRepository.save(

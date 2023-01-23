@@ -17,23 +17,45 @@ public class BoardRepositoryImpl implements BoardRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
 
-    public Page<Board> findBoards(Pageable pageable) {
-        QBoard qBoard = QBoard.board;
+    public Board findOneById(Long id) {
+        QBoard board = QBoard.board;
 
-        List<Board> content =  queryFactory.selectFrom(qBoard)
+        return queryFactory.selectFrom(board)
+                .where(board.id.eq(id))
+                .fetchOne();
+    }
+
+    public Page<Board> findBoards(Pageable pageable) {
+        QBoard board = QBoard.board;
+
+        List<Board> content =  queryFactory.selectFrom(board)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(qBoard.id.desc())
+                .orderBy(board.id.desc())
                 .fetch();
 
         return new PageImpl<>(content, pageable, content.size());
     }
 
     public void editContent(String content, Long id) {
-        QBoard qBoard = QBoard.board;
-        queryFactory.update(qBoard)
-                .set(qBoard.content, content)
-                .where(qBoard.id.eq(id))
+        QBoard board = QBoard.board;
+
+        queryFactory.update(board)
+                .set(board.content, content)
+                .where(board.id.eq(id))
                 .execute();
+    }
+
+    public Page<Board> searchBoardsByTitle(String title, Pageable pageable) {
+        QBoard board = QBoard.board;
+
+        List<Board> content =  queryFactory.selectFrom(board)
+                .where(board.title.contains(title))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(board.id.desc())
+                .fetch();
+
+        return new PageImpl<>(content, pageable, content.size());
     }
 }

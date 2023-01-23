@@ -31,6 +31,19 @@ public class BoardController {
         return ResponseEntity.ok(boards);
     }
 
+    @GetMapping("/board/search")
+    public ResponseEntity<?> searchBoardByTitle(
+            @PageableDefault(page = 0, size = 10)
+            @SortDefault.SortDefaults({
+                    @SortDefault(sort = "id")
+            }) Pageable pageable,
+            @RequestParam String title
+    ) {
+        Page<BoardResponse> boards = boardService.searchByTitle(title, pageable);
+
+        return ResponseEntity.ok(boards);
+    }
+
     @PostMapping("/board/post")
     public ResponseEntity<?> postBoard(@RequestBody BoardRequest boardRequest) {
         boardService.saveBoard(boardRequest);
